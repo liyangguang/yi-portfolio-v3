@@ -106,18 +106,31 @@ export default {
     return {
       WIDTH: window.innerWidth,
       HEIGHT: window.innerHeight,
+      floatingTimeline: [],
     };
   },
   mounted() {
-    this._initView();
-    window.addEventListener('resize', this._initView.bind(this));
-  },
-  methods: {
-    _initView() {
+    this._connectLines();
+    this._restartFloating();
+
+    window.addEventListener('resize', () => {
       this.WIDTH = window.innerWidth;
       this.HEIGHT = window.innerHeight;
-      gsap.killTweensOf('svg > g');
+      this._restartFloating();
+    });
+  },
+  methods: {
+    _connectLines() {
+      gsap.set('svg > g > *', {strokeDasharray: '0 100'});
+      gsap.to('svg > g > *', {duration: 2, strokeDasharray: '1 0'});
+      gsap.to('svg > g > .-dash', {duration: 2, strokeDasharray: '3 3'});
+    },
+    _restartFloating() {
+      // Kill all existing timeline to avoid prop updates.
+      this.floatingTimeline.forEach((timeline) => timeline.kill());
+      // Set the props.
       this._setShapePosition();
+      // Restart the floating.
       this._floating();
     },
     _setShapePosition() {
@@ -147,6 +160,7 @@ export default {
           .to(el, { duration: 3, x:'+=10', y:'+=20', ease: 'power1.easeInOut'})
           .to(el, { duration: 3, x:'-=10', y:'-=20', ease: 'power1.easeInOut'})
           .to(el, { duration: 3, x:'-=10', y:'+=20', ease: 'power1.easeInOut'})
+        this.floatingTimeline.push(shapeTimeline);
       });
       const dotTimeline = gsap.timeline({repeat: -1, yoyo: true});
       dotTimeline
@@ -156,6 +170,7 @@ export default {
         .to('svg > .others', { duration: 3, x:'+=10', y:'+=20', ease: 'power1.easeInOut'})
         .to('svg > .others', { duration: 3, x:'-=10', y:'-=10', ease: 'power1.easeInOut'})
         .to('svg > .others', { duration: 3, x:'-=10', y:'+=20', ease: 'power1.easeInOut'})
+      this.floatingTimeline.push(dotTimeline);
     },
   },
 }
