@@ -191,8 +191,8 @@ export default {
       this.shapeDotsFloatingTimeline = groupFloating(SELECTORS.SHAPE_DOTS, 50);
 
       gsap.timeline()
-        .to(SELECTORS.FREE_DOTS_GROUP, {duration: 60, rotate: 360, repeat: -1, ease: 'none'}, 0)
-        .to(SELECTORS.SHAPES, {duration: 200, rotate: 360, repeat: -1, ease: 'none'}, 0)
+        .to(SELECTORS.FREE_DOTS_GROUP, {duration: 60, rotation: 360, repeat: -1, ease: 'none', svgOrigin: `${this.WIDTH /2} ${this.HEIGHT / 2}`}, 0)
+        .to(SELECTORS.SHAPES, {duration: 200, rotation: 360, repeat: -1, ease: 'none', svgOrigin: `${this.WIDTH /2} ${this.HEIGHT / 2}`}, 0)
         .set([SELECTORS.ALL_DASH, SELECTORS.ALL_LINE], {strokeDasharray: '0 100'}, 0)
         .add(this._setShapePosition(false), 0)
         .add(this._randomizeDotsPosition(), 0)
@@ -215,7 +215,7 @@ export default {
         .addLabel(TIMELINE_LABLES.DRAW_LINE_START, '-=.5')
           .to(SELECTORS.ALL_LINE, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, strokeDasharray: '1 0'}, TIMELINE_LABLES.DRAW_LINE_START)
           .to(SELECTORS.ALL_DASH, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, strokeDasharray: '3 3'}, TIMELINE_LABLES.DRAW_LINE_START)
-          // .to(SELECTORS.ALL_SHAPES, {duration: 'random(20, 30)', rotate: 360, repeat: -1, ease: 'none'}, TIMELINE_LABLES.DRAW_LINE_START)
+          .to(SELECTORS.ALL_SHAPES, {duration: 'random(20, 30)', rotation: 360, repeat: -1, ease: 'none', transformOrigin: '50% 50%'}, TIMELINE_LABLES.DRAW_LINE_START)
           .to(SELECTORS.ALL_DASH, {duration: 1, strokeDashoffset: 25, repeat: -1, ease: 'none'}, TIMELINE_LABLES.DRAW_LINE_START)
     },
     _randomizeDotsPosition() {
@@ -257,8 +257,8 @@ export default {
 const itemFloating = (el, distance, isSlow) => {
   const duration = isSlow ? 'random(4, 5)' : 'random(1, 2)';
   return gsap.timeline({repeat: -1, yoyo: true})
-    .to(el, { duration, x: `+=random(-${distance}, ${distance})`, y: `+=random(-${distance}, ${distance})`, rotate: '+=random(-20, 20)', ease: 'power1.easeInOut'})
-    .to(el, { duration, x: `+=random(-${distance}, ${distance})`, y: `+=random(-${distance}, ${distance})`, rotate: '+=random(-20, 20)', ease: 'power1.easeInOut'})
+    .to(el, { duration, x: `+=random(-${distance}, ${distance})`, y: `+=random(-${distance}, ${distance})`, ease: 'power1.easeInOut'})
+    .to(el, { duration, x: `+=random(-${distance}, ${distance})`, y: `+=random(-${distance}, ${distance})`, ease: 'power1.easeInOut'})
 };
 
 const groupFloating = (selector, distance, isSlow) => {
@@ -292,10 +292,6 @@ svg {
   height: 100vh;
   pointer-events: none;
   opacity: 0.6;
-}
-
-g {
-  transform-origin: 50% 50%;
 }
 
 circle {
