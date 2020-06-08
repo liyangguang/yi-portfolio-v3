@@ -136,6 +136,15 @@
     <circle/>
     <circle/>
     <circle/>
+    <circle/>
+    <circle/>
+    <circle/>
+    <circle/>
+    <circle/>
+    <circle/>
+    <circle/>
+    <circle/>
+    <circle/>
   </g>
 </svg>
 </template>
@@ -282,7 +291,7 @@ svg {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 g {

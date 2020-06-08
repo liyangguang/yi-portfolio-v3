@@ -1,10 +1,11 @@
 <template lang="pug">
 div
   main
+    .content-screen: div
+      h1 Hello 
+      h1 I'm Yi Nie
     .content-screen
-      h1 Hello, I'm Yi Nie
-    .content-screen
-      h1 I solve complex problems
+      h2 I solve complex problems
   HomeBackground(ref="background")
 </template>
 
@@ -34,5 +35,21 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+h1{
+  font-weight: 900;
+  line-height: 80px;
+  font-size:48px;
+  letter-spacing: 20px;
+  text-transform: uppercase;
+  text-align: center;
+}
+h2{
+  font-weight: 900;
+  line-height: 24px;
+  font-size:32px;
+  letter-spacing: 12px;
+  text-transform: uppercase;
+  text-align: center;
 }
 </style>
