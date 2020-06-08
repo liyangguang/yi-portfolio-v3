@@ -130,7 +130,7 @@ const SELECTORS = {
 const DURATIONS_IN_SECONDS = {
   INITIAL_FLAOTING: 2,
   MOVE_IN: 1,
-  DRAW_LINE: 2,
+  DRAW_LINE: 1,
 };
 
 const TIMELINE_LABLES = {
@@ -145,6 +145,7 @@ export default {
       WIDTH: window.innerWidth,
       HEIGHT: window.innerHeight,
       shapeDotsFloatingTimeline: null,
+      hasConnectRun: false,
     };
   },
   mounted() {
@@ -160,9 +161,11 @@ export default {
         .add(this._randomizeDotsPosition(), 0)
         .add(groupFloating(SELECTORS.OTHER_DOTS, 100), 0)
         .add(this.shapeDotsFloatingTimeline, 0)
-        
     },
-    _connectDots() {
+    connectDots() {  // Referenced in Home.vue
+      if (this.hasConnectRun) return;
+      this.hasConnectRun = true;
+
       gsap.timeline()
         .call(() => {this.shapeDotsFloatingTimeline.pause();}, null, 0)
         .add(this._setShapePosition(true), 0)
@@ -175,6 +178,7 @@ export default {
           .to(SELECTORS.ALL_LINE, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, stagger: .1, strokeDasharray: '1 0'}, TIMELINE_LABLES.DRAW_LINE_START)
           .to(SELECTORS.ALL_DASH, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, stagger: .1, strokeDasharray: '3 3'}, TIMELINE_LABLES.DRAW_LINE_START)
           .add(groupFloating(SELECTORS.ALL_SHAPES, 20, true), TIMELINE_LABLES.DRAW_LINE_START)
+          .to(SELECTORS.ALL_DASH, {duration: 1, strokeDashoffset: 25, repeat: -1, ease: 'none'}, TIMELINE_LABLES.DRAW_LINE_START)
     },
     _randomizeDotsPosition() {
       return gsap.timeline()

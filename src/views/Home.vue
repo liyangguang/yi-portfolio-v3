@@ -3,7 +3,8 @@ div
   main
     .content-screen
       h1 Hello, I'm Yi Nie
-      button(@click="trigger") trigger
+    .content-screen
+      h1 I solve complex problems
   HomeBackground(ref="background")
 </template>
 
@@ -12,23 +13,24 @@ import HomeBackground from '@/components/HomeBackground.vue';
 
 export default {
   components: {HomeBackground},
+  created() {
+    window.addEventListener('scroll', this.scrollHandler.bind(this));
+  },
   methods: {
-    trigger() {
-      this.$refs.background._connectDots();
+    scrollHandler() {
+      if (window.scrollY >= window.innerHeight * .9) {
+        this.$refs.background.connectDots();
+      }
     },
   },
 }
 </script>
 
 <style lang="scss" scoped>
-main {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.content-screen {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  max-width: 100%;  // For the scroll bar
   display: flex;
   justify-content: center;
   align-items: center;
