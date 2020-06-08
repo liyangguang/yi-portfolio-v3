@@ -295,7 +295,7 @@ svg {
 }
 
 g {
-  transform-origin: center center;
+  transform-origin: 50% 50%;
 }
 
 circle {
