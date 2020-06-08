@@ -174,9 +174,9 @@ export default {
           x: 0,
           y: 0,
         }, 0)
-        .addLabel(TIMELINE_LABLES.DRAW_LINE_START)
-          .to(SELECTORS.ALL_LINE, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, stagger: .1, strokeDasharray: '1 0'}, TIMELINE_LABLES.DRAW_LINE_START)
-          .to(SELECTORS.ALL_DASH, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, stagger: .1, strokeDasharray: '3 3'}, TIMELINE_LABLES.DRAW_LINE_START)
+        .addLabel(TIMELINE_LABLES.DRAW_LINE_START, '-=.5')
+          .to(SELECTORS.ALL_LINE, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, strokeDasharray: '1 0'}, TIMELINE_LABLES.DRAW_LINE_START)
+          .to(SELECTORS.ALL_DASH, {duration: DURATIONS_IN_SECONDS.DRAW_LINE, strokeDasharray: '3 3'}, TIMELINE_LABLES.DRAW_LINE_START)
           .add(groupFloating(SELECTORS.ALL_SHAPES, 20, true), TIMELINE_LABLES.DRAW_LINE_START)
           .to(SELECTORS.ALL_DASH, {duration: 1, strokeDashoffset: 25, repeat: -1, ease: 'none'}, TIMELINE_LABLES.DRAW_LINE_START)
     },
@@ -251,13 +251,14 @@ svg {
   width: 100vw;
   height: 100vh;
   pointer-events: none;
+  opacity: 0.5;
 }
 
 circle {
   fill: white;
 
   &:not([r]) {
-    r: 2;
+    r: 3;
   }
 }
 
