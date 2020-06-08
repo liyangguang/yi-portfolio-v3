@@ -3,7 +3,8 @@ div
   main
     .content-screen
       h1 Hello, I'm Yi Nie
-  HomeBackground
+      button(@click="trigger") trigger
+  HomeBackground(ref="background")
 </template>
 
 <script>
@@ -11,6 +12,11 @@ import HomeBackground from '@/components/HomeBackground.vue';
 
 export default {
   components: {HomeBackground},
+  methods: {
+    trigger() {
+      this.$refs.background._connectDots();
+    },
+  },
 }
 </script>
 
