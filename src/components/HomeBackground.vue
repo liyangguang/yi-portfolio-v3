@@ -179,32 +179,47 @@ export default {
     return {
       WIDTH: window.innerWidth,
       HEIGHT: window.innerHeight,
-      shapeDotsFloatingTimeline: null,
-      hasConnectRun: false,
+      runningFloating: [],  // This need to be killed when switching states
+      state: 'separate',  // separate, connected, shapes-only
     };
+  },
+  created() {
+    window.addEventListener('scroll', this._scrollHandler.bind(this));
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this._scrollHandler.bind(this));
   },
   mounted() {
     this._initAnimation();
   },
   methods: {
     _initAnimation() {
-      this.shapeDotsFloatingTimeline = groupFloating(SELECTORS.SHAPE_DOTS, 50);
+      let floatShapeDots, floatFreeDots;
 
       gsap.timeline()
-        .to(SELECTORS.FREE_DOTS_GROUP, {duration: 60, rotation: 360, repeat: -1, ease: 'none', svgOrigin: `${this.WIDTH /2} ${this.HEIGHT / 2}`}, 0)
-        .to(SELECTORS.SHAPES, {duration: 200, rotation: 360, repeat: -1, ease: 'none', svgOrigin: `${this.WIDTH /2} ${this.HEIGHT / 2}`}, 0)
+        .to(SELECTORS.FREE_DOTS_GROUP, {duration: 100, rotation: 360, repeat: -1, ease: 'none', svgOrigin: `${this.WIDTH /2} ${this.HEIGHT / 2}`}, 0)
+        .to(SELECTORS.SHAPES, {duration: 200, rotation: -360, repeat: -1, ease: 'none', svgOrigin: `${this.WIDTH /2} ${this.HEIGHT / 2}`}, 0)
         .set([SELECTORS.ALL_DASH, SELECTORS.ALL_LINE], {strokeDasharray: '0 100'}, 0)
-        .add(this._setShapePosition(false), 0)
-        .add(this._randomizeDotsPosition(), 0)
-        .add(groupFloating(SELECTORS.FREE_DOTS, 50), 0)
-        .add(this.shapeDotsFloatingTimeline, 0)
+        .add(this._setShapePosition(false, true), 0)
+        .add(this._randomizeDotsPosition(false), 0)
+        .call(() => {
+          floatShapeDots = groupFloating(SELECTORS.SHAPE_DOTS, 50);
+          floatFreeDots = groupFloating(SELECTORS.FREE_DOTS, 50);
+          this.runningFloating = [floatShapeDots, floatFreeDots];
+        }, null, 0)
+        .add(floatShapeDots, 0)
+        .add(floatFreeDots, 0)
     },
-    connectDots() {  // Referenced in Home.vue
-      if (this.hasConnectRun) return;
-      this.hasConnectRun = true;
+    _connectDots() {
+      this._stopAllFloating();
 
+      let floatFreeDots;
       gsap.timeline()
-        .call(() => {this.shapeDotsFloatingTimeline.pause();}, null, 0)
+        .call(() => {
+          floatFreeDots = groupFloating(SELECTORS.FREE_DOTS, 50);
+          this.runningFloating = [floatFreeDots];
+        }, null, 0)
+        .add(floatFreeDots, 0)
         .add(this._setShapePosition(true), 0)
         .to(SELECTORS.SHAPE_DOTS, {
           duration: DURATIONS_IN_SECONDS.MOVE_IN,
@@ -218,38 +233,106 @@ export default {
           .to(SELECTORS.ALL_SHAPES, {duration: 'random(20, 30)', rotation: 360, repeat: -1, ease: 'none', transformOrigin: '50% 50%'}, TIMELINE_LABLES.DRAW_LINE_START)
           .to(SELECTORS.ALL_DASH, {duration: 1, strokeDashoffset: 25, repeat: -1, ease: 'none'}, TIMELINE_LABLES.DRAW_LINE_START)
     },
-    _randomizeDotsPosition() {
-      return gsap.timeline()
-        .set(SELECTORS.SHAPE_DOTS, {
-          r: 'random(1, 3)',
-          x: `random(-${this.WIDTH / 15}, ${this.WIDTH / 15})`,
-          y: `random(-${this.HEIGHT / 15}, ${this.HEIGHT / 15})`,
-        })
-        .set(SELECTORS.FREE_DOTS, {
-          r: 'random(1, 3)',
-          x: `random(${this.WIDTH * .2}, ${this.WIDTH * .8})`,
-          y: `random(${this.HEIGHT * .2}, ${this.HEIGHT * .8})`,
-        });
+    _reverseConnectDots() {
+      this._stopAllFloating();
+
+      let floatShapeDots, floatFreeDots;
+      gsap.timeline()
+        .to([SELECTORS.ALL_DASH, SELECTORS.ALL_LINE], {duration: DURATIONS_IN_SECONDS.DRAW_LINE, strokeDasharray: '0 10', ease: 'none'}, 0)
+        .add(this._setShapePosition(true, true), 0)
+        .add(this._randomizeDotsPosition(true), 0)
+        .call(() => {
+          floatShapeDots = groupFloating(SELECTORS.SHAPE_DOTS, 50);
+          floatFreeDots = groupFloating(SELECTORS.FREE_DOTS, 50);
+          this.runningFloating = [floatShapeDots, floatFreeDots];
+        }, null, 0)
+        .add(groupFloating(SELECTORS.SHAPE_DOTS, 50), 0)
+        .add(groupFloating(SELECTORS.FREE_DOTS, 50), 0)
     },
-    _setShapePosition(isExactPosition) {
+    _simplify() {
+      gsap.to(SELECTORS.FREE_DOTS, {duration: 1, opacity: 0});
+    },
+    _reverseSimplify() {
+      gsap.to(SELECTORS.FREE_DOTS, {duration: 1, opacity: 1});
+    },
+    _randomizeDotsPosition(isAnimating) {
+      if (isAnimating) {
+        return gsap.timeline()
+          .to(SELECTORS.SHAPE_DOTS, {
+            duration: DURATIONS_IN_SECONDS.MOVE_IN,
+            r: 'random(1, 3)',
+            x: `random(-${this.WIDTH / 15}, ${this.WIDTH / 15})`,
+            y: `random(-${this.HEIGHT / 15}, ${this.HEIGHT / 15})`,
+          })
+          .to(SELECTORS.FREE_DOTS, {
+            duration: DURATIONS_IN_SECONDS.MOVE_IN,
+            r: 'random(1, 3)',
+            x: `random(${this.WIDTH * .2}, ${this.WIDTH * .8})`,
+            y: `random(${this.HEIGHT * .2}, ${this.HEIGHT * .8})`,
+          });
+      } else {
+        return gsap.timeline()
+          .set(SELECTORS.SHAPE_DOTS, {
+            r: 'random(1, 3)',
+            x: `random(-${this.WIDTH / 15}, ${this.WIDTH / 15})`,
+            y: `random(-${this.HEIGHT / 15}, ${this.HEIGHT / 15})`,
+          })
+          .set(SELECTORS.FREE_DOTS, {
+            r: 'random(1, 3)',
+            x: `random(${this.WIDTH * .2}, ${this.WIDTH * .8})`,
+            y: `random(${this.HEIGHT * .2}, ${this.HEIGHT * .8})`,
+          });
+      }
+    },
+    _setShapePosition(isAnimating, isHalfPosition=false) {
       const timeline = gsap.timeline();
       SHAPE_FINAL_POSITION.forEach((shape, index) => {
-        if (isExactPosition) {
+        if (isAnimating) {
           timeline
             .to(`.shape-${index + 1}`, {
               duration: DURATIONS_IN_SECONDS.MOVE_IN,
-              x: shape.x * this.WIDTH,
-              y: shape.y * this.HEIGHT,
-            }, 0)
+              x: (isHalfPosition ? (shape.x + .5) / 2 : shape.x) * this.WIDTH,
+              y: (isHalfPosition ? (shape.y + .5) / 2 : shape.y) * this.HEIGHT,
+            }, 0);
         } else {
           timeline
             .set(`.shape-${index + 1}`, {
-              x: (shape.x + .5) / 2 * this.WIDTH,
-              y: (shape.y + .5) / 2 * this.HEIGHT,
-            })
+              x: (isHalfPosition ? (shape.x + .5) / 2 : shape.x) * this.WIDTH,
+              y: (isHalfPosition ? (shape.y + .5) / 2 : shape.y) * this.HEIGHT,
+            }, 0);
         }
       });
       return timeline;
+    },
+    _stopAllFloating() {
+      this.runningFloating.forEach((tl) => tl.pause());
+      this.runningFloating = [];
+    },
+    _scrollHandler() {
+      switch(this.state) {
+        case 'separate':
+          if (window.scrollY > window.innerHeight * .7) {
+            this._connectDots();
+            this.state = 'connected';
+          }
+          break;
+        case 'connected':
+          if (window.scrollY < window.innerHeight * .7) {
+            this._reverseConnectDots();
+            this.state = 'separate';
+          }
+          if (window.scrollY > window.innerHeight * 1.7) {
+            this._simplify();
+            this.state = 'shapes-only';
+          }
+          break;
+        case 'shapes-only':
+          if (window.scrollY < window.innerHeight * 1.7) {
+            this._reverseSimplify();
+            this.state = 'connected';
+          }
+          break;
+      }
     },
   },
 }

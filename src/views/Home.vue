@@ -6,6 +6,10 @@ div
       h1 I'm Yi Nie
     .content-screen
       h2 I solve complex problems
+    ul
+      li project 1
+      li project 2
+      li project 3
   HomeBackground(ref="background")
 </template>
 
@@ -14,16 +18,6 @@ import HomeBackground from '@/components/HomeBackground.vue';
 
 export default {
   components: {HomeBackground},
-  created() {
-    window.addEventListener('scroll', this.scrollHandler.bind(this));
-  },
-  methods: {
-    scrollHandler() {
-      if (window.scrollY >= window.innerHeight * .9) {
-        this.$refs.background.connectDots();
-      }
-    },
-  },
 }
 </script>
 
@@ -36,6 +30,7 @@ export default {
   justify-content: center;
   align-items: center;
 }
+
 h1{
   font-weight: 900;
   line-height: 80px;
@@ -44,6 +39,7 @@ h1{
   text-transform: uppercase;
   text-align: center;
 }
+
 h2{
   font-weight: 900;
   line-height: 1.6;
@@ -51,5 +47,16 @@ h2{
   letter-spacing: 12px;
   text-transform: uppercase;
   text-align: center;
+}
+
+ul {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+li {
+  height: 30em;
+  margin: 1em;
+  background: rgba(255,255,255,.5);
 }
 </style>
