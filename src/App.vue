@@ -15,6 +15,8 @@ export default {
 <style lang="scss">
 :root {
   --z-header: 10;
+
+  --content-width: 1200px;
 }
 
 * {
@@ -32,7 +34,18 @@ body {
   line-height: 1.6;
 }
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
 img {
   max-width: 100%;
+}
+
+._content-width {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 1em;
 }
 </style>

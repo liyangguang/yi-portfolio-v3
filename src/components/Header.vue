@@ -1,8 +1,8 @@
 <template lang="pug">
 header
-  img.logo(src="@/assets/logo.svg")
+  router-link(to="/"): img.logo(src="@/assets/logo.svg")
   nav
-    a project
+    router-link(to="/") project
     a side work
     a resume
 </template>

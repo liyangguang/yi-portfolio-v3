@@ -3,17 +3,15 @@
   .text-container
     ul
       li(v-for="tag in project.tags") {{tag}}
-    h2 {{project.title}}
+    h2: router-link(:to="project.id") {{project.title}}
     p {{project.description}}
-  .image-container
-    img(:class="{'-faded-out': isTopFadeout}", :src="project.topImage")
-    img(:class="{'-faded-out': isBottomFadeout}", :src="project.bottomImage")
+  router-link(:to="project.id").image-container
+    img(:class="{'-faded-out': isTopFadeout}", :src="project.homeTopImage")
+    img(:class="{'-faded-out': isBottomFadeout}", :src="project.homeBottomImage")
 </template>
 
 <script>
-import { gsap } from "gsap";
-
-const BOTTOM_IMAGE_ANIMATION_RATIO = .5;
+const BOTTOM_IMAGE_ANIMATION_RATIO = .7;
 const TOP_IMAGE_ANIMATION_RATIO = .9;
 
 export default {
@@ -103,7 +101,7 @@ li {
   img:first-child {
     position: absolute;
     z-index: 1;
-    transition: opacity .8s ease-out, transform .8s ease-out;
+    transition: opacity .3s ease-out, transform 1.2s ease-out;
   }
 
   img:last-child {
