@@ -29,5 +29,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: white;
   background: #0D0E12;
+  line-height: 1.6;
+}
+
+img {
+  max-width: 100%;
 }
 </style>

@@ -251,9 +251,11 @@ export default {
     },
     _simplify() {
       gsap.to(SELECTORS.FREE_DOTS, {duration: 1, opacity: 0});
+      gsap.to(SELECTORS.SHAPES, {duration: 1, opacity: .5});
     },
     _reverseSimplify() {
       gsap.to(SELECTORS.FREE_DOTS, {duration: 1, opacity: 1});
+      gsap.to(SELECTORS.SHAPES, {duration: 1, opacity: 1});
     },
     _randomizeDotsPosition(isAnimating) {
       if (isAnimating) {

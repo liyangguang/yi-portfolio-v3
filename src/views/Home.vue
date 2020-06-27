@@ -2,23 +2,58 @@
 div
   main
     .content-screen: div
-      h1 Hello 
-      h1 I'm Yi Nie
+      p.title Hello 
+      p.title I'm Yi Nie
     .content-screen
-      h2 I solve complex problems
-    ul
-      li project 1
-      li project 2
-      li project 3
-  HomeBackground(ref="background")
+      p.subtitle I solve complex problems
+    .projects
+      HomeProject(v-for="(project, index) in PROJECTS", :project="project", :direction="index % 2")
+  HomeBackground
 </template>
 
 <script>
 import HomeBackground from '@/components/HomeBackground.vue';
+import HomeProject from '@/components/HomeProject.vue';
 
 export default {
-  components: {HomeBackground},
+  components: {HomeBackground, HomeProject},
+  data() {
+    return {
+      PROJECTS,
+    };
+  },
 }
+
+const PROJECTS = [
+  {
+    title: 'pricing revamping',
+    tags: ['Ssytem design', '0 to 1'],
+    description: 'Design and launch pricing portal from sratch.  Streamline the Affirm’s pricing workflow and expand pricng capacity.',
+    topImage: require('@/assets/pricing-revamping/home-top.png'),
+    bottomImage: require('@/assets/pricing-revamping/home-bottom.png'),
+  },
+  {
+    title: 'pricing revamping',
+    tags: ['Ssytem design', '0 to 1'],
+    description: 'Design and launch pricing portal from sratch.  Streamline the Affirm’s pricing workflow and expand pricng capacity.',
+    topImage: require('@/assets/credible-mobile/home-top.png'),
+    bottomImage: require('@/assets/credible-mobile/home-bottom.png'),
+  },
+  {
+    title: 'pricing revamping',
+    tags: ['Ssytem design', '0 to 1'],
+    description: 'Design and launch pricing portal from sratch.  Streamline the Affirm’s pricing workflow and expand pricng capacity.',
+    topImage: require('@/assets/pricing-revamping/home-top.png'),
+    bottomImage: require('@/assets/pricing-revamping/home-bottom.png'),
+  },
+  {
+    title: 'pricing revamping',
+    tags: ['Ssytem design', '0 to 1'],
+    description: 'Design and launch pricing portal from sratch.  Streamline the Affirm’s pricing workflow and expand pricng capacity.',
+    topImage: require('@/assets/credible-mobile/home-top.png'),
+    bottomImage: require('@/assets/credible-mobile/home-bottom.png'),
+  },
+];
 </script>
 
 <style lang="scss" scoped>
@@ -31,7 +66,7 @@ export default {
   align-items: center;
 }
 
-h1{
+.title {
   font-weight: 900;
   line-height: 80px;
   font-size:48px;
@@ -40,7 +75,7 @@ h1{
   text-align: center;
 }
 
-h2{
+.subtitle {
   font-weight: 900;
   line-height: 1.6;
   font-size:32px;
@@ -49,14 +84,8 @@ h2{
   text-align: center;
 }
 
-ul {
+.projects {
   max-width: 1200px;
   margin: 0 auto;
-}
-
-li {
-  height: 30em;
-  margin: 1em;
-  background: rgba(255,255,255,.5);
 }
 </style>
