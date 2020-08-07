@@ -2,10 +2,10 @@
 .project-header
   template(v-if="project")
     .text-container._content-width
-      .left
+      div
         h1 {{project.title}}
         p {{project.description}}
-      .right
+      div
         p.label timeline
         p {{project.timeline}}
         p.label role
@@ -38,6 +38,14 @@ export default {
   grid-gap: 2em;
   padding-top: 3em;
   padding-bottom: 3em;
+
+  @media (max-width: 800px) {
+    display: block;
+
+    & > div:first-child {
+      margin-bottom: 3em;
+    }
+  }
 }
 
 h1 {
