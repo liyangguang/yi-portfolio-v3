@@ -60,6 +60,14 @@ export default {
   grid-auto-flow: dense;
   margin: 12em 0;
 
+  @media screen and (max-width: 800px) {
+    display: block;
+
+    .text-container {
+      margin-bottom: 3em;
+    }
+  }
+
   .image-container {
     grid-column: 2 / span 2;
 

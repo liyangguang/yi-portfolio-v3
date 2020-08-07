@@ -18,12 +18,18 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1em 2em;
+  padding: 1em 4em;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: var(--z-header);
+  background: #0D0E12dd;
+  transition: background var(--transition);
+
+  &:hover {
+    background: #0D0E12;
+  }
 }
 
 .logo {
