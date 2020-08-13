@@ -1,6 +1,6 @@
 <template lang="pug">
-._project._content-width
-  section
+._content-width
+  section._fade-in
     .section-title
       h2 problem
       p._title Current pricing service can’t support rapid merchant growth
@@ -11,7 +11,7 @@
         p._title {{item.title}}
         p._text {{item.text}}
   
-  section.research-section
+  section.research-section._fade-in
     div
       .section-title
         h2 research
@@ -29,7 +29,7 @@
     h3 Pricing Journey Map
     img._full-width(src="@/assets/pricing-revamping/journey-map.png")
   
-  section
+  section._fade-in
     .section-title
       h2 project vision
       p._title Streamline the process and expand pricing capacity
@@ -40,7 +40,7 @@
         p._title {{item.title}}
         p._text {{item.text}}
   
-  section
+  section._fade-in
     .section-title
       h2 scoping
       p._title Streamline the process and expand pricing capacity
@@ -52,7 +52,7 @@
       h2 exploration
       p._title Streamline the process and expand pricing capacity
       p._text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-    .parts._card(v-for="(part, partIndex) in EXPLORATION")
+    .parts._card._fade-in(v-for="(part, partIndex) in EXPLORATION")
       p: span._tag(:class="{[`-tag-${partIndex + 1}`]: true}") {{part.tag}}
       h3 {{part.title}}
       p {{part.text}}
@@ -62,7 +62,7 @@
           p.title {{option.title}}
           p {{option.text}}
   
-  section
+  section._fade-in
     .section-title
       h2 final design
       h3: span._tag.-tag-1 Part 1
@@ -71,20 +71,20 @@
     ._grid.-default-2
       img._full-width(v-for="item in FINAL_DESIGN_1", :src="item")
   
-  section
+  section._fade-in
     .section-title
       h3: span._tag.-tag-2 Part 2
       p._title Streamline the process and expand pricing capacity
       p._text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
     img._full-width(src="@/assets/pricing-revamping/_placeholder.png")
   
-  section
+  section._fade-in
     .section-title
       h2 implementation
       p._title Build close relationship with engineer and product
       p._text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
   
-  section
+  section._fade-in
     .section-title
       h2 impact
       p._title Build close relationship with engineer and product
@@ -97,6 +97,8 @@
 </template>
 
 <script>
+import {fadeInElement} from '@/helpers';
+
 export default {
   data() {
     return {
@@ -148,10 +150,17 @@ export default {
       ],
     };
   },
+  mounted() {
+    this.$el.querySelectorAll('._fade-in').forEach((el) => {
+      fadeInElement(el);
+    });
+  },
 }
 </script>
 
 <style lang="scss" scoped>
+@import 'project.scss';
+
 .research-section {
   display: grid;
   grid-template-columns: 2fr 3fr;

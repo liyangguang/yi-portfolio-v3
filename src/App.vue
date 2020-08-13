@@ -23,7 +23,7 @@ export default {
   --z-header: 10;
 
   --content-width: 1200px;
-  --transition: .5s ease;
+  --transition: .5s ease-in-out;
 }
 
 * {
@@ -71,83 +71,14 @@ img {
   align-items: center;
 }
 
-._project {
-  section {
-    margin: 10em 0;
-  }
+._fade-in {
+  opacity: 0;
+  transform: translateY(-3rem);
+  transition: opacity var(--transition), transform var(--transition);
 
-  .section-title {
-    max-width: 450px;
-
-    h2 {
-      opacity: 0.7;
-      text-transform: uppercase;
-      font-size: 0.9em;
-      margin-bottom: 1.5em;
-    }
-
-    h3 {
-      font-size: 1em;
-      margin: 3em 0 1.2em;
-    }
-
-    ._title {
-      font-size: 2em;
-      line-height: 1.2;
-      margin-bottom: 0.8em;
-    }
-
-    ._text {
-      margin-bottom: 3em;
-    }
-  }
-
-  ._bleeding {
-    background: #212226;
-    margin: 0 -1000px;
-    padding: 3em 1000px;
-  }
-
-  ._grid {
-    display: grid;
-    grid-gap: 1.5rem;
-
-    &.-default-2 {grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));}
-    &.-default-3 {grid-template-columns: repeat(auto-fit, 300px);}
-    &.-default-4 {grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
-  }
-
-  ._card {
-    background: #212226;
-    padding: 2.5em 3em;
-
-    ._icon {
-      height: 2em;
-      margin-bottom: 0.5em;
-    }
-
-    ._large-number {
-      font-size: 4em;
-      font-weight: bold;
-      line-height: 1;
-    }
-
-    ._title {
-      font-size: 1.1em;
-      font-weight: bold;
-      margin: 0.5em 0;
-    }
-  }
-
-  ._tag {
-    display: inline-block;
-    padding: .3em 0.5em;
-    color: #01203D;
-    font-weight: bold;
-
-    &.-tag-1 {background: var(--accent-color-1);}
-    &.-tag-2 {background: var(--accent-color-2);}
-    &.-tag-3 {background: var(--accent-color-3); color: white;}
+  &.-active {
+    opacity: 1;
+    transform: none;
   }
 }
 </style>
