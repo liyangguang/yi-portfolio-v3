@@ -7,17 +7,19 @@ div
     .content-screen
       p.subtitle I solve complex problems
   ._content-width
-      HomeProject(v-for="(project, index) in PROJECTS", :key="project.id", :project="project", :direction="index % 2")
+    HomeProject(v-for="(project, index) in PROJECTS", :key="project.id", :project="project", :direction="index % 2")
+    Contact
   HomeBackground
 </template>
 
 <script>
 import HomeBackground from '@/components/HomeBackground.vue';
 import HomeProject from '@/components/HomeProject.vue';
+import Contact from '@/components/Contact.vue';
 import {PROJECTS} from '@/PROJECT_DATA.js';
 
 export default {
-  components: {HomeBackground, HomeProject},
+  components: {HomeBackground, HomeProject, Contact},
   data() {
     return {
       PROJECTS,

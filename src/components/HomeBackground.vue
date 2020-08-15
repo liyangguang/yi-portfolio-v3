@@ -1,5 +1,5 @@
 <template>
-<svg :viewBox="`0 0 ${WIDTH} ${HEIGHT}`">
+<svg class="home-background" :viewBox="`0 0 ${WIDTH} ${HEIGHT}`">
   <g class="shapes">
     <g class="shape shape-1 cone">
       <circle cx="72" cy="15"/>
@@ -366,7 +366,7 @@ const SHAPE_FINAL_POSITION = [
 ];
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 svg {
   position: fixed;
   top: 0;
@@ -378,13 +378,17 @@ svg {
   pointer-events: none;
   opacity: 0.6;
 }
+</style>
 
-circle {
-  fill: white;
-}
-
-path, line, .circle-line {
-  stroke: white;
-  fill: none;
+<style lang="scss">
+.home-background {
+  circle {
+    fill: white;
+  }
+  
+  path, line, .circle-line {
+    stroke: white;
+    fill: none;
+  }
 }
 </style>
