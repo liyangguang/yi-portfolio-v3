@@ -4,7 +4,7 @@ header
   nav
     router-link(to="/") project
     router-link(to="/sidework") side work
-    a resume
+    a(href="/Yi Nie - Product designer - Resume.pdf", target="_blank") resume
 </template>
 
 <script>
