@@ -3,7 +3,7 @@ header
   router-link(to="/"): img.logo(src="@/assets/logo.svg")
   nav
     router-link(to="/") project
-    router-link(to="/sidework") side work
+    router-link(to="/sidework") sidework
     a(href="/Yi Nie - Product designer - Resume.pdf", target="_blank") resume
 </template>
 
@@ -30,6 +30,10 @@ header {
   &:hover {
     background: #0D0E12;
   }
+
+  @media screen and (max-width: 500px) {
+    padding: 1em;
+  }
 }
 
 .logo {
@@ -40,8 +44,13 @@ nav {
   text-transform: uppercase;
   font-weight: 600;
 
+  @media screen and (max-width: 500px) {
+    display: flex;
+    flex-direction: column;
+  }
+
   a {
-    margin: 0 1em;
+    margin: .3em 1em;
   }
 }
 </style>
