@@ -18,11 +18,9 @@
 import {PROJECTS} from '@/PROJECT_DATA.js';
 
 export default {
-  props: ['projectId'],
-  data() {
-    return {
-      project: PROJECTS.find((project) => project.id = this.projectId),
-    };
+  computed: {
+    projectId() {return this.$route.params.projectId;},
+    project() {return PROJECTS.find((project) => project.id === this.projectId);},
   },
 }
 </script>

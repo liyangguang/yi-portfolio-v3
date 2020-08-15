@@ -28,7 +28,6 @@ export default {
 
 * {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -39,7 +38,7 @@ body {
   color: white;
   background: #0D0E12;
   line-height: 1.4;
-  font-size: 14px;
+  font-size: 15px;
   overflow-x: hidden;
 }
 
@@ -48,8 +47,8 @@ a {
   text-decoration: none;
 }
 
-li {
-  list-style: none;
+ul, ol {
+  padding-left: 1em;
 }
 
 img {
