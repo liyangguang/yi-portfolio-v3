@@ -3,7 +3,7 @@ header
   router-link(to="/"): img.logo(src="@/assets/logo.svg")
   nav
     router-link(to="/") project
-    a side work
+    router-link(to="/sidework") side work
     a resume
 </template>
 
