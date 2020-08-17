@@ -34,11 +34,12 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   text-transform: capitalize;
-  padding: .5em 1em .5em 0;
+  padding: .5em 1.5em .5em 0;
   transition: background var(--transition);
 
   &:hover {
     background: #0D0E1277;
+    backdrop-filter: blur(3px);
 
     .text {opacity: 1; transform: none;}
     .line {opacity: 0;transform: translateX(-100%);}
@@ -60,6 +61,11 @@ p {
 
   &.-H2 {width: 3em;}
   &.-H3 {width: 1em;}
+
+  @media screen and (max-width: 500px) {
+    &.-H2 {width: 1.5em;}
+    &.-H3 {width: .5em;}
+  }
 }
 
 .text {
