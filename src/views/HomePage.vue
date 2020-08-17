@@ -8,7 +8,7 @@ div
       p.subtitle I solve complex problems
   ._content-width
     HomeProject(v-for="(project, index) in PROJECTS", :key="project.id", :project="project", :direction="index % 2")
-    Contact
+    Contact.contacts
   HomeBackground
 </template>
 
@@ -55,5 +55,9 @@ export default {
   letter-spacing: 12px;
   text-transform: uppercase;
   text-align: center;
+}
+
+.contacts {
+  margin-top: 20em;
 }
 </style>

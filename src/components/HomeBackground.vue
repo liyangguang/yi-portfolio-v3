@@ -1,5 +1,5 @@
 <template>
-<svg class="home-background" :viewBox="`0 0 ${WIDTH} ${HEIGHT}`">
+<svg class="home-background" :class="{'near-bottom': nearBottom}" :viewBox="`0 0 ${WIDTH} ${HEIGHT}`">
   <g class="shapes">
     <g class="shape shape-1 cone">
       <circle cx="72" cy="15"/>
@@ -174,6 +174,8 @@ const TIMELINE_LABLES = {
   DRAW_LINE_START: 'DRAW_LINE_START',
 };
 
+const NEAR_BOTTOM_THRESHOLD = 300;
+
 export default {
   data() {
     return {
@@ -181,6 +183,7 @@ export default {
       HEIGHT: window.innerHeight,
       runningFloating: [],  // This need to be killed when switching states
       state: 'separate',  // separate, connected, shapes-only
+      nearBottom: false,
     };
   },
   created() {
@@ -335,6 +338,8 @@ export default {
           }
           break;
       }
+
+      this.nearBottom = document.body.scrollHeight - window.innerHeight - window.scrollY < NEAR_BOTTOM_THRESHOLD;
     },
   },
 }
@@ -377,6 +382,11 @@ svg {
   height: 100vh;
   pointer-events: none;
   opacity: 0.6;
+  transition: opacity var(--transition);
+
+  &.near-bottom {
+    opacity: 0;
+  }
 }
 </style>
 

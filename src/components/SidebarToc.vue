@@ -34,8 +34,12 @@ export default {
   top: 50%;
   transform: translateY(-50%);
   text-transform: capitalize;
+  padding: .5em 1em .5em 0;
+  transition: background var(--transition);
 
   &:hover {
+    background: #0D0E1277;
+
     .text {opacity: 1; transform: none;}
     .line {opacity: 0;transform: translateX(-100%);}
   }
