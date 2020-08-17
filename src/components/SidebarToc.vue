@@ -38,24 +38,22 @@ export default {
   transition: background var(--transition);
 
   &:hover {
-    background: #0D0E1277;
-    backdrop-filter: blur(3px);
 
     .text {opacity: 1; transform: none;}
-    .line {opacity: 0;transform: translateX(-100%);}
+    .line {opacity: 0; transform: translateX(-100%);}
   }
 }
 
 p {
   position: relative;
-  margin: 0.5em 0;
 }
 
 .line {
-  position: absolute;
+  display: block;
   height: 1px;
   background: #fff;
-  top: 0.7em;
+  margin: 1.8em 0;
+  
   opacity: 1;
   transition: opacity var(--transition), transform var(--transition);
 
@@ -69,9 +67,14 @@ p {
 }
 
 .text {
+  position: absolute;
+  top: -0.7em;
   white-space: nowrap;
   opacity: 0;
+  padding: 0.2em 1em;
   transform: translateX(-100%);
+  background: #0D0E1277;
+  backdrop-filter: blur(3px);
   transition: opacity var(--transition), transform var(--transition);
 
   &.-H2 {padding-left: 1em;}
