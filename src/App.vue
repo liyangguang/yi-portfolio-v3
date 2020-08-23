@@ -21,6 +21,8 @@ export default {
   --accent-color-2: #5257F6;
   --accent-color-3: #ff9798;
 
+  --primary-color: #5257F6;
+
   --z-header: 10;
 
   --content-width: 1200px;

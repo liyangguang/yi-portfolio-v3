@@ -5,6 +5,7 @@
       li(v-for="tag in project.tags") {{tag}}
     h2: router-link(:to="project.id") {{project.title}}
     p {{project.description}}
+    router-link.more-link(:to="project.id") read more
   router-link(:to="project.id").image-container
     img(:class="{'-faded-out': isTopFadeout}", :src="project.homeTopImage")
     img(:class="{'-faded-out': isBottomFadeout}", :src="project.homeBottomImage")
@@ -130,5 +131,43 @@ li {
 
 p {
   line-height: 1.6;
+}
+
+.more-link {
+  background-image: url(../assets/shared/icon-arrow.svg);
+  background-size: 1.2em;
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-right: 1.6em;
+  text-transform: uppercase;
+  display: inline-block;
+  margin-top: 1em;
+  letter-spacing: .1em;
+  font-weight: 700;
+  transition: padding var(--transition);
+  position: relative;
+  font-size: 1.1em;
+
+  &::after {
+    content: '';
+    position: absolute;
+    background: var(--primary-color);
+    height: 0.8em;
+    left: 0;
+    right: 0;
+    bottom: -0.2em;
+    z-index: -1;
+    opacity: 0.8;
+    transition: opacity var(--transition), transform var(--transition);
+  }
+
+  &:hover {
+    padding-right: 2em;
+
+    &::after {
+      opacity: 1;
+      transform: scaleY(.4);
+    }
+  }
 }
 </style>
