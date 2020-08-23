@@ -1,7 +1,7 @@
 export const PROJECTS = [
   {
     id: 'pricing-revamping',
-    title: 'Pricing Revamping',
+    title: 'Pricing Service Revamping',
     tags: ['System design', '0 to 1'],
     description: 'Design and launch pricing portal from sratch.  Streamline the Affirm’s pricing workflow and expand pricng capacity.',
     timeline: 'Oct 2019 - Jan 2020',

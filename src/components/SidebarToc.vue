@@ -31,6 +31,7 @@ export default {
 .sidebar-toc {
   position: fixed;
   left: 0;
+  opacity: 0.7;
   top: 50%;
   transform: translateY(-50%);
   text-transform: capitalize;
@@ -57,7 +58,7 @@ p {
   opacity: 1;
   transition: opacity var(--transition), transform var(--transition);
 
-  &.-H2 {width: 3em;}
+  &.-H2 {width: 2em;}
   &.-H3 {width: 1em;}
 
   @media screen and (max-width: 500px) {

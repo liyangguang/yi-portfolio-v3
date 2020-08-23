@@ -34,8 +34,8 @@ export default {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 2em;
-  padding-top: 3em;
-  padding-bottom: 3em;
+  padding-top: 2.5em;
+  padding-bottom: 4em;
 
   @media (max-width: 800px) {
     display: block;
@@ -47,20 +47,22 @@ export default {
 }
 
 h1 {
-  font-size: 3em;
-  max-width: 30rem;
+  font-family: 'Karla', sans-serif;
+  font-size: 4.5em;
+  line-height: 1.2;
   position: relative;
   top: -.25em;
 }
 
 h1 + p {
-  max-width: 20rem;
-  margin-top: 1em;
+  max-width: 30rem;
 }
 
 .label {
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  margin-bottom: 8px;
 }
 
 .label + p {
@@ -68,8 +70,9 @@ h1 + p {
 }
 
 .image-container {
-  height: 30em;
+  height: 40em;
   background: cover;
   background-position: center center;
+  background-size: cover;
 }
 </style>

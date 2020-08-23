@@ -42,7 +42,8 @@ header {
 
 nav {
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 400;
+  letter-spacing: 1.6px;
 
   @media screen and (max-width: 500px) {
     display: flex;

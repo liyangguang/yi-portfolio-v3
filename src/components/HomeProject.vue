@@ -87,9 +87,14 @@ export default {
 h2 {
   text-transform: uppercase;
   margin: .5em 0;
-  font-size: 2em;
+  font-size: 2.5em;
   letter-spacing: .25em;
   line-height: 1.2;
+  font-weight: 900;
+}
+
+ul {
+  padding: 0;
 }
 
 li {
@@ -99,7 +104,6 @@ li {
   background: rgba(255,255,255,.3);
   color: white;
   padding: 4px 12px;
-  border-radius: 2em;
   font-size: 0.9em;
 }
 
@@ -122,5 +126,9 @@ li {
 .-faded-out {
   opacity: 0;
   transform: translateY(-20%);
+}
+
+p {
+  line-height: 1.6;
 }
 </style>
