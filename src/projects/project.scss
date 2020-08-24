@@ -83,3 +83,8 @@ li {
   &.-tag-2 {background: var(--accent-color-2);}
   &.-tag-3 {background: var(--accent-color-3); color: white;}
 }
+
+h2, h3 {
+  // For the sidebar toc scrolling
+  scroll-margin-top: 10em;
+}

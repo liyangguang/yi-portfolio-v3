@@ -1,8 +1,8 @@
 <template lang="pug">
 .sidebar-toc
-  p(v-for="heading in headings")
-    span.line(:class="{[`-${heading.tagName}`]: true}")
-    a.text(:class="{[`-${heading.tagName}`]: true}", @click="scrollIntoView(heading)") {{heading.textContent}}
+  p(v-for="(heading, index) in headings")
+    span.line(:class="{[`-${heading.tagName}`]: true, '-active': activeIndex === index}")
+    a.text(:class="{[`-${heading.tagName}`]: true, '-active': activeIndex === index}", @click="scrollIntoView(heading)") {{heading.textContent}}
 </template>
 
 <script>
@@ -11,17 +11,35 @@ export default {
   data() {
     return {
       headings: [],
+      activeIndex: 0,
+      _interval: null,
     };
   },
   mounted() {
     this._findAllHeadings();
+    this._interval = setInterval(() => {
+      // We need to handle image loading, page height change, throttling, etc. thus just use an interval
+      this._highlightScrollPosition();
+    }, 300);
+  },
+  destroyed() {
+    clearInterval(this._interval);
   },
   methods: {
     _findAllHeadings() {
       this.headings = Array.from(this.pageDom.querySelectorAll('h2, h3'));
     },
+    _highlightScrollPosition() {
+      const currentY = window.scrollY;
+      for (const heading of this.headings) {
+        if (heading.getBoundingClientRect().top + window.innerHeight * .6 > 0) {
+          this.activeIndex = this.headings.indexOf(heading);
+          return;
+        }
+      }
+    },
     scrollIntoView(element) {
-      element.scrollIntoView({behavior: 'smooth', block: 'center'});
+      element.scrollIntoView({behavior: 'smooth', block: 'start'});
     }
   },
 }
@@ -31,7 +49,6 @@ export default {
 .sidebar-toc {
   position: fixed;
   left: 0;
-  opacity: 0.7;
   top: 50%;
   transform: translateY(-50%);
   text-transform: capitalize;
@@ -39,9 +56,12 @@ export default {
   transition: background var(--transition);
 
   &:hover {
-
-    .text {opacity: 1; transform: none;}
+    .text {opacity: .5; transform: none;}
     .line {opacity: 0; transform: translateX(-100%);}
+  }
+
+  & .-active {
+    opacity: 1 !important;
   }
 }
 
@@ -51,11 +71,11 @@ p {
 
 .line {
   display: block;
-  height: 1px;
+  height: 2px;
   background: #fff;
   margin: 1.8em 0;
   
-  opacity: 1;
+  opacity: .5;
   transition: opacity var(--transition), transform var(--transition);
 
   &.-H2 {width: 2em;}
@@ -80,6 +100,10 @@ p {
 
   &.-H2 {padding-left: 1em;}
   &.-H3 {padding-left: 2.5em;}
+
+  &:hover {
+    opacity: .8 !important;
+  }
 }
 
 a {
@@ -87,7 +111,6 @@ a {
 
   &:hover {
     text-decoration: underline;
-
   }
 }
 </style>
