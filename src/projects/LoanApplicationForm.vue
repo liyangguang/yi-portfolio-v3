@@ -155,15 +155,17 @@
         p._title {{item.title}}
         p._text {{item.text}}
     p I came up with 3 options: the chat UI, one question per step and linking to other social network to prefill information. In order to pick the which option we are going to implement, we listed out how each concept would solve the problem and how difficult it is to implement and decide to move forward with one question per page option first.
-  ._bleeding: ._grid.-default-3
-    div(v-for="(option, index) in ROUND_3_OPTIONS")
-      h4 Option {{index + 1}}
-      img(:src="option.image")
-      p How does it solve the problem?
-      ul
-        li(v-for="problem in option.problems") {{problem}}
-      p Effort to implement
-      p {{option.effort}}
+  ._bleeding
+    table.option-compare-table
+      tr
+        td
+        td(v-for="(option, index) in ROUND_3_OPTIONS"): img(:src="option.image")
+      tr(v-for="(item, itemI) in ROUND_3_RESEARCH")
+        td: b {{item.title}}
+        td(v-for="(option, index) in ROUND_3_OPTIONS", :class="{'-check': option.problems[itemI]}")
+      tr
+        td: b Effort to implement
+        td(v-for="(option, index) in ROUND_3_OPTIONS") {{option.effort}}
   
   section._fade-in
     .section-title
@@ -234,44 +236,47 @@ export default {
         {title: 'Ask email at front and password at the end', text: 'The hypothesis here is that separating email and password will reduce the feeling of creating accounts so that user feel this is less friction.', image: require('@/assets/loan-application-form/round1-test4.jpg')},
       ],
       ROUND_1_RESULT: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {title: 'Creating accounts first', text: 'Variation 1 has 1.3% increase on form conversion and 15.7% increase on from starting the form to close a loan.', number: '+15.7%'},
+        {title: 'After getting results', text: 'Variation 3 has negative performance compared to baseline. It has a 6.4% decrease on form conversion and 1.9% decrease on close loan.', number: '-6.4%'},
       ],
       ROUND_2_TRANSPARENT: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {title: 'Option 1 - Value prompt', text: 'Participants like it\'s straightforward but value prompt is too vague and doesn’t resonate with them', image: require('@/assets/loan-application-form/round2-option1.png')},
+        {title: 'Option 2 - Social proof', text: 'Participants think social proof is important but they prefer reviews from the third party. Participant won’t trust testimonials.', image: require('@/assets/loan-application-form/round2-option2.png')},
+        {title: 'Option 3 -Process Video', text: 'Participants find it’s very helpful to understand the process, the video makes it easier to understand', image: require('@/assets/loan-application-form/round2-option3.png')},
+        {title: 'Option 4 - Sample dashboard', text: 'Participants like that they can know what lenders are on our platform but the information is too generic', image: require('@/assets/loan-application-form/round2-option4.png')},
+        {title: 'Option 5 - Estimator', text: 'Participants all feel this is really helpful to get an estimated range before jumping into creating accounts they indicated that if the rates are good they are more likely to sign up.', image: require('@/assets/loan-application-form/round2-option5.png')},
       ],
       ROUND_2_ITERATIONS: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {title: 'Iteration 1', text: '(Option 5 from the previous step)', image: require('@/assets/loan-application-form/round2-iteration1.png')},
+        {title: 'Iteration 2', text: 'Design with real content and data', image: require('@/assets/loan-application-form/round2-iteration2.png')},
+        {title: 'Iteration 3', text: 'Rate chart add too much cognitive load', image: require('@/assets/loan-application-form/round2-iteration3.png')},
+        {title: 'Iteration 4', text: '1. Credit score section took too much space. 2. Too much number to process', image: require('@/assets/loan-application-form/round2-iteration4.png')},
+        {title: 'Iteration 5', text: 'Use red on poor credit score bad may give user negative feeling', image: require('@/assets/loan-application-form/round2-iteration5.png')},
+        {title: 'Iteration 6', text: 'Users indicated they don’t know the slider is interactive', image: require('@/assets/loan-application-form/round2-iteration6.gif')},
       ],
       ROUND_2_FINAL: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {title: 'Variation 1: Video to illustrate the process', text: 'This variation features a quick walkthrough video of our process up to a dashboard. The hypothesis was that showing users our simple process would help users know what to expect, and therefore make the process feel known and simple.', image: require('@/assets/loan-application-form/round2-variation1.gif')},
+        {title: 'Variation 2: Rate estimator', text: 'This variation aims to see if showing potential rates would, in fact, increase sign-ups and overall conversion. This variation features an interactive slider where users can estimate their credit score (by 10 point increments), and we will display the lowest possible rate across lenders.', image: require('@/assets/loan-application-form/round2-variation2.gif')},
       ],
       ROUND_2_RESULT: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {title: 'Video variation', text: 'Video variation has a slightly 1.8% decrease on account creating compared to baseline, but it has a 2.1% lift on form conversion and 6.6% lift on close loan', number: '+6.6%'},
+        {title: 'Rate estimator variation', text: 'Rate estimator variation has 12.3% decrease on account creating compared to baseline and 3.6% decrease on close loan.', number: '-3.6%'},
       ],
       ROUND_3_RESEARCH: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {title: 'Reduce scroll back and forth', text: '', icon: require('@/assets/loan-application-form/icon-scroll.svg')},
+        {title: 'Make the form shorter or make the form feel shorter', text: '', icon: require('@/assets/loan-application-form/icon-short.svg')},
+        {title: 'Surface the help content to streamline the process', text: '', icon: require('@/assets/loan-application-form/icon-help.svg')},
+        {title: 'Add more humanize factor to the form', text: '', icon: require('@/assets/loan-application-form/icon-human.svg')},
       ],
       ROUND_3_OPTIONS: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {problems: [true, true, true, false], effort: 'Easy', image: require('@/assets/loan-application-form/round3-option1.png')},
+        {problems: [true, true, false, true], effort: 'Medium', image: require('@/assets/loan-application-form/round3-option2.png')},
+        {problems: [false, true, true, false], effort: 'Hard', image: require('@/assets/loan-application-form/round3-option3.png')},
       ],
       ROUND_3_LEARNING: [
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
-        // {title: '', text: '', image: require('@/assets/loan-application-form/')},
+        {title: '', text: 'The analysis validated our hypothesis that asking one question at one time streamline the process.', icon: require('@/assets/loan-application-form/icon-one.svg')},
+        {title: '', text: 'By surfacing the help content and why we are asking these questions, users have less difficulty answering questions. We see a decreased drop off rate on some “hard” questions.', icon: require('@/assets/loan-application-form/icon-help.svg')},
+        {title: '', text: 'In the future, we are planning to test the new design also on the desktop', icon: require('@/assets/loan-application-form/icon-desktop.svg')},
       ],
     };
   },
@@ -287,6 +292,8 @@ export default {
 @import 'project.scss';
 
 .round-title {
+  margin: -5em 0;
+
   h2 {
     text-transform: uppercase;
     opacity: 0.3;
@@ -297,6 +304,29 @@ export default {
     font-size: 2em;
     position: relative;
     bottom: 1em;
+  }
+}
+
+h4 {
+  font-size: 1.2em;
+  margin: 1em 0 .5em;
+}
+
+.option-compare-table {
+  border-collapse: collapse;
+  width: 100%;
+
+  td {
+    border: 1px solid #777;
+    padding: 0.5em;
+    text-align: center;
+
+    &.-check {
+      background-image: url(../assets/loan-application-form/icon-check.svg);
+      background-size: 1.6em;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
   }
 }
 </style>

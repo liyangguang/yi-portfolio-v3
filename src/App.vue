@@ -26,6 +26,8 @@ export default {
   --z-header: 10;
 
   --content-width: 1200px;
+  --text-max-width: 500px;
+
   --transition: .5s ease-in-out;
 }
 
@@ -55,11 +57,7 @@ ul, ol {
 }
 
 img {
-  max-width: 100%;
-
-  &._full-width {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 ._content-width {

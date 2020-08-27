@@ -27,7 +27,7 @@
   
   .journey-map._bleeding
     h3 Pricing Journey Map
-    img._full-width(src="@/assets/pricing-revamping/journey-map.png")
+    img(src="@/assets/pricing-revamping/journey-map.png")
   
   section._fade-in
     .section-title
@@ -45,7 +45,7 @@
       h2 scoping
       p._title Streamline the process and expand pricing capacity
       p._text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-    img._full-width(src="@/assets/pricing-revamping/parts.png")
+    img(src="@/assets/pricing-revamping/parts.png")
   
   section
     .section-title
@@ -69,14 +69,14 @@
       p._title Streamline the process and expand pricing capacity
       p._text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
     ._grid.-default-2
-      img._full-width(v-for="item in FINAL_DESIGN_1", :src="item")
+      img(v-for="item in FINAL_DESIGN_1", :src="item")
   
   section._fade-in
     .section-title
       h3: span._tag.-tag-2 Part 2
       p._title Streamline the process and expand pricing capacity
       p._text Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
-    img._full-width(src="@/assets/pricing-revamping/_placeholder.png")
+    img(src="@/assets/pricing-revamping/_placeholder.png")
   
   section._fade-in
     .section-title
