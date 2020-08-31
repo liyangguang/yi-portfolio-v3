@@ -4,14 +4,19 @@ section {
 
 p {
   margin-bottom: 0.5em;
+  max-width: var(--text-max-width);
 }
 
 li {
   margin-bottom: 0.3em;
 }
 
+img {
+  margin: 1em 0;
+}
+
 .section-title {
-  max-width: 450px;
+  max-width: var(--text-max-width);
 
   h2, h3 {
     &:first-child {

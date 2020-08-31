@@ -28,7 +28,7 @@
   
   .journey-map._bleeding
     h3 Pricing Journey Map
-    img._full-width(src="@/assets/pricing-revamping/journey-map.png")
+    img(src="@/assets/pricing-revamping/journey-map.png")
   
   section._fade-in
     .section-title
@@ -46,8 +46,8 @@
       h2 New User Flow
       p._title Reduce the steps taken to implement from 15 to 5
       p._text In the old system, team averagly has to go through around 20 steps to get pricing program implemented for 1 merchant. With the new design, we are able to reduce steps to around 10. In addition, the new interface is also able to reduct the time and effort spend in each step.  We expect to see massive efficiency gain after the redesign.
-    img._full-width(src="@/assets/pricing-revamping/parts.png")
-  
+    img(src="@/assets/pricing-revamping/parts.png")
+
   section
     .section-title
       h2 EXPLORAtion & Iteration
@@ -83,6 +83,7 @@
         p {{item.text}}
         img(:src="item.image")
   
+
   
   section.two-column-section._fade-in
     div
