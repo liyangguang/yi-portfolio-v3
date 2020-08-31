@@ -49,7 +49,7 @@ li {
   display: grid;
   grid-gap: 1.5rem;
 
-  &.-default-2 {grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));}
+  &.-default-2 {grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));}
   &.-default-3 {grid-template-columns: repeat(auto-fit, 300px);}
   &.-default-4 {grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));}
 }
