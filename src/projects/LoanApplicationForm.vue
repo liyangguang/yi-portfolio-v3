@@ -24,24 +24,26 @@
 
   section._fade-in
     .section-title
-      h3 research
+      h3 research & explorations
       p._title Users don't want to create account
       p._text Conversation data from Google Analytics reveals that there is a large drop off on the last step. We learned from survey that users don't want to create account. But an account is necessary for finalizing loan application. Our hypothesis is that different flow of creating accounts will impact conversion. Here are several options I’ve explored.
   ._bleeding: ._grid.-default-4
     div(v-for="option in ROUND_1_ACCOUNT_OPTIONS")
       p.title {{option.title}}
       p {{option.text}}
-      img(:src="option.image")
+      img.flow-image(:src="option.image")
 
   section._fade-in
     .section-title
       h3 Design and A/B testing
       p._title Test creating account flow
       p._text One of the challenges we have is that, in order to track different designs impact around the full funnel, the traffic on Credible is not large enough to run multiple ab testing at the same time. So we have to select one direction and run only 2 to 3 testing at the same time to confidently test the hypothesis. We ranked these three directions based on impact and effort. We choose to test the create account flow because we believe it will have the highest impact with relative low implementation efforts.
-    template(v-for="option in ROUND_1_CREATE_ACCOUNT_OPTIONS")
-      h4 {{option.title}}
-      p {{option.text}}
-      img(:src="option.image")
+    ._grid.-default-2
+      div.template(v-for="option in ROUND_1_CREATE_ACCOUNT_OPTIONS")
+        img(:src="option.image")
+        h4 {{option.title}}
+        p {{option.text}}
+        
 
   section._fade-in
     .section-title
@@ -59,23 +61,29 @@
       h3 Learning
       p._title Creating accounts is not the real problem
     ol
-      li Even though variation 1 and 2 ’s form conversion are pretty similar, but creating accounts first have a more positive impact later in the process with indicates that our hypothesis is correct. Users who are willing to create accounts first have higher intend and will convert better later in the process.
-      li Separating the email address and password field variation performs worst. This indicates that “creating account” itself is not the real problem. There is some reason behind “I don’t want to create account”
+      li 
+        p Even though variation 1 and 2 ’s form conversion are pretty similar, but creating accounts first have a more positive impact later in the process with indicates that our hypothesis is correct. Users who are willing to create accounts first have higher intend and will convert better later in the process.
+      li 
+        p Separating the email address and password field variation performs worst. This indicates that “creating account” itself is not the real problem. There is some reason behind “I don’t want to create account”
   
   .round-title
     h2 Round 2
     p Dig deep into the problem
   
-  section._fade-in
-    .section-title
-      h3 research
-      p._title Why don’t users want to create accounts?
-    h4 Quantitative
-    p The 1st round experiment has set up a good foundation for us. The data reveals that on creating account page, there is a large amount of drop off, but after creating accounts, there are very few users abandon the form. So it’s clear that the biggest opportunity is how can get more low intend users filling the form and checking their rates.
-    h4 Qualitative
-    p The testing result from the first iteration also reveals that what really bothers users is not creating accounts, we need to dip deeper to learn the reason behind that. So I did more depth interview with users. The real insight comes after I asked several why.
-    img(src="@/assets/loan-application-form/round2-research.jpg")
-    p The user research reveals the real friction of creating accounts is that we are asking user their personal/private information without offering them any value. Users don’t have any idea of what’s going happen next and what they can get.
+  section.two-column-section._fade-in
+    div 
+      .section-title
+        h3 research
+        p._title Why don’t users want to create accounts?
+      h4 Quantitative
+      p The 1st round experiment has set up a good foundation for us. The data reveals that on creating account page, there is a large amount of drop off, but after creating accounts, there are very few users abandon the form. So it’s clear that the biggest opportunity is how can get more low intend users filling the form and checking their rates.
+      h4 Qualitative
+      p The testing result from the first iteration also reveals that what really bothers users is not creating accounts, we need to dip deeper to learn the reason behind that. So I did more depth interview with users. The real insight comes after I asked several why.
+      h4 Findings
+      p The user research reveals the real friction of creating accounts is that we are asking user their personal/private information without offering them any value. Users don’t have any idea of what’s going happen next and what they can get.
+    .image-container
+      img(src="@/assets/loan-application-form/round2-research.jpg")
+      
   
   section._fade-in
     .section-title
@@ -85,8 +93,8 @@
     p Same reason as mentioned above, now we need to choose directions we want to test. Since the improvements are all focusing on create account page, efforts to implement the design are about the same, this time I did internal concept testing. With the testing, I asked participants to rank different concepts based on the helpfulness. Concept 5 and concept 3 get the highest ranking. Below is the summary of this concept evaluation:
   ._bleeding: ._grid.-default-2
     div(v-for="option in ROUND_2_TRANSPARENT")
-      h4 {{option.title}}
       img(:src="option.image")
+      h4 {{option.title}}
       p {{option.text}}
 
   section._fade-in
@@ -96,18 +104,19 @@
       p._text After the internal testing, I decided to move forward with the video walkthrough concept and the rate estimator concept. It’s time to push the details. I did several iterations to make sure users can understand how to use it.
   ._bleeding: ._grid.-default-2
     div(v-for="option in ROUND_2_ITERATIONS")
-      h4 {{option.title}}
       img(:src="option.image")
+      h4 {{option.title}}
       p {{option.text}}
   
   section._fade-in
     .section-title
       h3 Testing
       p._title Design variations
-    template(v-for="option in ROUND_2_FINAL")
-      h4 {{option.title}}
-      p {{option.text}}
-      img(:src="option.image")
+    ._grid.-default-2
+      div.template(v-for="option in ROUND_2_FINAL")
+        img(:src="option.image", :style="{width: option.imageWidth}")
+        h4 {{option.title}}
+        p {{option.text}}
   
   section._fade-in
     .section-title
@@ -124,8 +133,10 @@
       h3 Learning
       p._title Transparency helps to build trust
     ul
-      li From the winning variation, we learned that providing users context about the process and what to expect appears to help build trust with users and contribute to higher overall conversion after a user has been prequalified.
-      li Even though rates estimator concept performs worse than the video we still want to understand why users are leaving. So I put up an exit survey asking users why they are leaving this page. It turns out that the primary reason is that the rates are too high for them. Even though this variation didn’t perform very well, we still think this is an interesting concept that we could evolve and use in other scenarios in the future.
+      li 
+        p From the winning variation, we learned that providing users context about the process and what to expect appears to help build trust with users and contribute to higher overall conversion after a user has been prequalified.
+      li 
+        p Even though rates estimator concept performs worse than the video we still want to understand why users are leaving. So I put up an exit survey asking users why they are leaving this page. It turns out that the primary reason is that the rates are too high for them. Even though this variation didn’t perform very well, we still think this is an interesting concept that we could evolve and use in other scenarios in the future.
 
   .round-title
     h2 Round 3
@@ -148,14 +159,14 @@
     .section-title
       h3 Hypothesis and Concepts
       p._title More efficient way to fill the form on mobile
-      p._text Based on the explorations I did on first round. , here are the approaches we can make form filling more efficient
+      p._text Based on the reserach finding, the team came up with four design principles. I explored 3 options: the chat UI, one question per step and linking to other social network to prefill information. In order to pick the which option we are going to implement, we listed out how each concept would solve the problem and how difficult it is to implement and decide to move forward with one question per page option first.
     ._grid.-default-3
       ._card(v-for="item in ROUND_3_RESEARCH")
         img._icon(:src="item.icon")
         p._title {{item.title}}
         p._text {{item.text}}
-    p I came up with 3 options: the chat UI, one question per step and linking to other social network to prefill information. In order to pick the which option we are going to implement, we listed out how each concept would solve the problem and how difficult it is to implement and decide to move forward with one question per page option first.
   ._bleeding
+    p Design option evluation 
     table.option-compare-table
       tr
         td
@@ -173,21 +184,21 @@
       p._title Iterations on one question per page
     h4 Iteration 1: Surface helper content
     p Instead of clicking into tooltip to learn helper content, the new design surface the helper content under each question.
-    ._grid.-default-2
+    ._grid.-default-3
       img(src="@/assets/loan-application-form/round3-iteration1-1.png")
       img(src="@/assets/loan-application-form/round3-iteration1-2.png")
     h4 Iteration 2: Turn dropdown to multiple selections
     p I tested the prototype above, it successfully reduced the back and forth scrolling. But I still found that all the drop-down fields still requires multiple taps. In order to simplify this part, I changed the drop-down fields to multiple selection fields.
-    ._grid.-default-2
+    ._grid.-default-3
       img(src="@/assets/loan-application-form/round3-iteration2-1.png")
       img(src="@/assets/loan-application-form/round3-iteration2-2.png")
     p The challenge here is that if the selection has more than five options, what should we do? The product manager helped me analysis the option selection data. We found out that the first four selected options cover 93.17% of our users. So the solution is to surface the top four selected options and hide other options in “Other”.
-    ._grid.-default-2
+    ._grid.-default-3
       img(src="@/assets/loan-application-form/round3-iteration2-3.jpg")
       img(src="@/assets/loan-application-form/round3-iteration2-4.jpg")
     h4 Iteration 3: Add delight to the product
     p The last iteration is to add more delight to the design and make the look and feel more friendly for our users. So I added icons on every page and animations on some key pages.
-    ._grid.-default-2
+    ._grid.-default-3
       img(src="@/assets/loan-application-form/round3-iteration3-1.png")
       img(src="@/assets/loan-application-form/round3-iteration3-2.png")
 
@@ -196,7 +207,7 @@
       h3 Testing
       p._title Design variations
       p._text We tested the final one question per page design with old design (baseline). Below is the two design’s overall flow.
-    ._grid.-default-2
+    ._grid.-default-3
       img(src="@/assets/loan-application-form/round3-variation1.gif")
       img(src="@/assets/loan-application-form/round3-variation2.gif")
   
@@ -256,7 +267,7 @@ export default {
       ],
       ROUND_2_FINAL: [
         {title: 'Variation 1: Video to illustrate the process', text: 'This variation features a quick walkthrough video of our process up to a dashboard. The hypothesis was that showing users our simple process would help users know what to expect, and therefore make the process feel known and simple.', image: require('@/assets/loan-application-form/round2-variation1.gif')},
-        {title: 'Variation 2: Rate estimator', text: 'This variation aims to see if showing potential rates would, in fact, increase sign-ups and overall conversion. This variation features an interactive slider where users can estimate their credit score (by 10 point increments), and we will display the lowest possible rate across lenders.', image: require('@/assets/loan-application-form/round2-variation2.gif')},
+        {title: 'Variation 2: Rate estimator', text: 'This variation aims to see if showing potential rates would, in fact, increase sign-ups and overall conversion. This variation features an interactive slider where users can estimate their credit score (by 10 point increments), and we will display the lowest possible rate across lenders.', image: require('@/assets/loan-application-form/round2-variation2.gif'), imageWidth: '97%'},
       ],
       ROUND_2_RESULT: [
         {title: 'Video variation', text: 'Video variation has a slightly 1.8% decrease on account creating compared to baseline, but it has a 2.1% lift on form conversion and 6.6% lift on close loan', number: '+6.6%'},
@@ -296,8 +307,10 @@ export default {
 
   h2 {
     text-transform: uppercase;
-    opacity: 0.3;
-    font-size: 3em;
+    opacity: 0.2;
+    font-size: 3.5em;
+    font-weight: 900;
+    letter-spacing:  10px;
   }
 
   p {
@@ -309,7 +322,7 @@ export default {
 
 h4 {
   font-size: 1.2em;
-  margin: 1em 0 .5em;
+  margin: 1em 0 .2em;
 }
 
 .option-compare-table {
@@ -329,4 +342,24 @@ h4 {
     }
   }
 }
+
+.flow-image{
+  width: 200px;
+}
+
+.two-column-section {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  grid-gap: 5em;
+
+  @media (max-width: 800px){
+    display: block;
+  }
+}
+
+.small-img{
+  width: 50%;
+}
+
+
 </style>
