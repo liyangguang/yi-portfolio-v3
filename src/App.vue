@@ -25,9 +25,9 @@ export default {
 
   --z-header: 10;
 
-  --content-width: 1200px;
+  --content-width: 1400px;
   --text-max-width: 500px;
-
+  
   --transition: .5s ease-in-out;
 }
 
