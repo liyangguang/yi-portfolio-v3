@@ -1,9 +1,9 @@
 # This is a the backend router config for Netlify
 
 # Route all static files
-/css /css
+# /css /css
 /js /js
-/img /img
+# /img /img
 /favicon.svg  /favicon.svg
 
 # Redirect all other path to index.html
