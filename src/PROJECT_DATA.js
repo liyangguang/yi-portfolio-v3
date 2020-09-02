@@ -11,6 +11,17 @@ export const PROJECTS = [
     heroImage: require('@/assets/pricing-revamping/hero.png'),
   },
   {
+    id: 'investor-analytics-dashboard',
+    title: 'Investor Analytics Dashboard',
+    tags: [''],
+    description: 'Led the design and research of Affirm’s portfolios analytics dashboard that deliver critique insights on loan performance of Affirm’s counterparties. Since launched, the dashboard has become a tool Capital market and Exec team review daily.',
+    timeline: 'Jun 2019 - Sep 2020',
+    role: 'Being the led designer on this project, I structure the research plan conducted several user research, designed the end to end experience and support engineer implementation',
+    homeTopImage: require('@/assets/investor-analytics-dashboard/home-top.png'),
+    homeBottomImage: require('@/assets/investor-analytics-dashboard/home-bottom.png'),
+    heroImage: require('@/assets/investor-analytics-dashboard/hero.png'),
+  },
+  {
     id: 'loan-application-form',
     title: 'Loan Application Form',
     tags: ['Desktop & Mobile', 'A/B testing & Iteration'],
