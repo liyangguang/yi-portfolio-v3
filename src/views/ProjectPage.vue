@@ -2,14 +2,16 @@
 div(ref="projectPage")
   ProjectHeader
 
-  template(v-if="!needPassword || passwordCorrect")
-    PriceRevamping(v-if="$route.params.projectId === 'pricing-revamping'")
-    LoanApplicationForm(v-if="$route.params.projectId === 'loan-application-form'")
+  template(v-if="!isPasswordProtected || passwordCorrect")
+    PriceRevamping(v-if="projectId === 'pricing-revamping'")
+    LoanApplicationForm(v-if="projectId === 'loan-application-form'")
+    InvestorAnalytics(v-if="projectId === 'investor-analytics-dashboard'")
   
-  .form(v-if="needPassword && !passwordCorrect")
+  form(v-else, @submit="checkPassword")
     p This project is password protected. Reach out to <a href="mailto:yinie.ux@gmail.com" target="_blank">me</a> if you are interested.
-    input(type="password", v-model="password", placeholder="Password", @keyup.enter="checkPassword")
+    input(type="password", autocomplete="new-password", v-model="password", placeholder="Password", @keyup.enter="checkPassword")
     button(@click="checkPassword") submit
+    p {{passwordMessage}}
 
   SidebarToc(v-if="pageMounted", :pageDom="$refs.projectPage")
 </template>
@@ -19,30 +21,48 @@ import ProjectHeader from '@/components/ProjectHeader.vue';
 import SidebarToc from '@/components/SidebarToc.vue';
 import PriceRevamping from '@/projects/PriceRevamping.vue';
 import LoanApplicationForm from '@/projects/LoanApplicationForm.vue';
+import InvestorAnalytics from '@/projects/InvestorAnalytics.vue';
+import {PROJECTS} from '@/PROJECT_DATA.js';
+import {fadeInElement} from '@/helpers';
 
-const PROJECTS_WITH_PASSWORD = ['pricing-revamping'];
 const PASSWORD = 'yinie-ux';
 
 export default {
-  components: {ProjectHeader, SidebarToc, PriceRevamping, LoanApplicationForm},
+  components: {ProjectHeader, SidebarToc, PriceRevamping, InvestorAnalytics, LoanApplicationForm},
   data() {
     return {
       pageMounted: false,
       passwordCorrect: false,
       password: '',
+      passwordMessage: '',
     };
   },
   computed: {
-    needPassword() {return PROJECTS_WITH_PASSWORD.includes(this.$route.params.projectId);},
+    projectId() {return this.$route.params.projectId;},
+    project() {return PROJECTS.find((project) => project.id === this.projectId);},
+    isPasswordProtected() {
+      // Skip the password for local devserver
+      if (location.host.includes('localhost')) return false;
+      return this.project.isPasswordProtected;
+    },
   },
   mounted() {
     this.pageMounted = true;  // TOC needs to be mounted after the page is ready
+    this.$el.querySelectorAll('._fade-in').forEach((el) => {
+      fadeInElement(el);
+    });
   },
   methods: {
-    checkPassword() {
+    checkPassword(e) {
+      if (e) {
+        e.preventDefault();
+      }
       this.passwordCorrect = this.password === PASSWORD;
       if (this.passwordCorrect) {
+        this.passwordMessage = '';
         window.scrollTo(0, 0);
+      } else {
+        this.passwordMessage = 'Eh-oh, wrong password... Feel free to ping me for the password!'
       }
     },
   },
@@ -50,7 +70,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.form {
+form {
   text-align: center;
   padding: 10em 0;
 

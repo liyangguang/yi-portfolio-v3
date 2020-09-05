@@ -11,7 +11,7 @@
         p._title {{item.title}}
         p._text {{item.text}}
   
-  section.two-column-section._fade-in
+  section._two-column-section._fade-in
     div
       .section-title
         h2 research
@@ -19,12 +19,12 @@
         p._text To understand our current internal work flow, tools we are using and major pain points for different teams, me and the PM talked to 6 different teams, conducted 3 round of user research. I created a journey map of the pricing workflow. 
 
       ul
-        li.icon-list._flex-center(v-for="item in RESEARCH")
+        li._icon-list(v-for="item in RESEARCH")
           img(:src="item.icon")
           | {{item.text}}
     .image-container
       img(src="@/assets/pricing-revamping/research.png")
-      p.caption 10 interviews, 2 workshop, 2 days of shadowing
+      p._caption 10 interviews, 2 workshop, 2 days of shadowing
   
   .journey-map._bleeding
     h3 Pricing Journey Map
@@ -53,7 +53,7 @@
       h2 EXPLORAtion & Iteration
       p._title Every design details could impact user’s efficacy
       p._text As a tool that is used by our internal users daily, every extra click means more fraction is added to their tasks. After we finalize the user flow, I went through several iterations on interfact design. Below are two examples among all the iterations and explorations
-    .parts._card._fade-in(v-for="(part, partIndex) in EXPLORATION")
+    ._card.-container-card._fade-in(v-for="(part, partIndex) in EXPLORATION")
       p: span._tag(:class="{[`-tag-${partIndex + 1}`]: true}") {{part.tag}}
       h3 {{part.title}}
       p {{part.text}}
@@ -85,7 +85,7 @@
   
 
   
-  section.two-column-section._fade-in
+  section._two-column-section._fade-in
     div
       .section-title
         h2 implementation
@@ -108,8 +108,6 @@
 </template>
 
 <script>
-import {fadeInElement} from '@/helpers';
-
 export default {
   data() {
     return {
@@ -161,30 +159,11 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.$el.querySelectorAll('._fade-in').forEach((el) => {
-      fadeInElement(el);
-    });
-  },
 }
 </script>
 
 <style lang="scss" scoped>
 @import 'project.scss';
-
-.two-column-section {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-gap: 5em;
-
-  @media (max-width: 800px){
-    display: block;
-  }
-}
-
-.caption {
-  text-align: center;
-}
 
 .image-container {
   margin-top: 3em;
@@ -194,35 +173,6 @@ export default {
   h3 {
     font-size: 1.5em;
     margin-bottom: 2em;
-  }
-}
-
-.icon-list {
-  margin: 2em 0;
-
-  img {
-    margin-right: .8em;
-    width: 1.8em;
-  }
-}
-
-.parts {
-  margin: 2em 0;
-
-  h3 {
-    margin-left: 0;
-    margin-top: 1em;
-    margin-bottom: 4px;
-    font-size: 1.1em;
-  }
-
-  h3 + p {
-    max-width: 500px;
-    margin-bottom: 1.5em;
-  }
-
-  .option {
-    font-size: 0.9em;
   }
 }
 

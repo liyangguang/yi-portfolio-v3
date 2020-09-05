@@ -66,11 +66,6 @@ img {
   padding: 0 3em;
 }
 
-._flex-center {
-  display: flex;
-  align-items: center;
-}
-
 ._fade-in {
   opacity: 0;
   transform: translateY(-3rem);

@@ -7,9 +7,9 @@ import SideworkPage from '@/views/SideworkPage.vue';
 Vue.use(VueRouter)
 
 const routes = [
-  {path: '/', name: 'HomePage', component: HomePage},
-  {path: '/sidework', name: 'ProjectPage', component: SideworkPage},
-  {path: '/:projectId', name: 'ProjectPage', component: ProjectPage},
+  {path: '/', component: HomePage},
+  {path: '/sidework', component: SideworkPage},
+  {path: '/:projectId', component: ProjectPage},
 ]
 
 const router = new VueRouter({

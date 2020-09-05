@@ -5,7 +5,7 @@
       h2 background
       p._title Pre-qualification for student loan
       p Credible is a marketplace for student loans, student loan refinancing, and personal loan. Pre-qualification is an important part of the whole process: By filling one pre-qualification form, users will be able to see a list of qualified lenders and rates.
-    img(src="../assets/loan-application-form/overall-process.png")
+    img(src="@/assets/loan-application-form/overall-process.png")
 
   section._fade-in
     .section-title
@@ -70,7 +70,7 @@
     h2 Round 2
     p Dig deep into the problem
   
-  section.two-column-section._fade-in
+  section._two-column-section._fade-in
     div 
       .section-title
         h3 research
@@ -224,8 +224,6 @@
 </template>
 
 <script>
-import {fadeInElement} from '@/helpers';
-
 export default {
   data() {
     return {
@@ -291,11 +289,6 @@ export default {
       ],
     };
   },
-  mounted() {
-    this.$el.querySelectorAll('._fade-in').forEach((el) => {
-      fadeInElement(el);
-    });
-  },
 }
 </script>
 
@@ -345,16 +338,6 @@ h4 {
 
 .flow-image{
   width: 200px;
-}
-
-.two-column-section {
-  display: grid;
-  grid-template-columns: 2fr 3fr;
-  grid-gap: 5em;
-
-  @media (max-width: 800px){
-    display: block;
-  }
 }
 
 .small-img{

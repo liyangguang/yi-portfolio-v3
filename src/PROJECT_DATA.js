@@ -1,6 +1,7 @@
 export const PROJECTS = [
   {
     id: 'pricing-revamping',
+    isPasswordProtected: true,
     title: 'Pricing Service Revamping',
     tags: ['System design', '0 to 1'],
     description: 'Design and launch pricing portal from sratch.  Streamline the Affirm’s pricing workflow and expand pricng capacity.',
@@ -12,6 +13,7 @@ export const PROJECTS = [
   },
   {
     id: 'investor-analytics-dashboard',
+    isPasswordProtected: true,
     title: 'Investor Analytics Dashboard',
     tags: [''],
     description: 'Led the design and research of Affirm’s portfolios analytics dashboard that deliver critique insights on loan performance of Affirm’s counterparties. Since launched, the dashboard has become a tool Capital market and Exec team review daily.',
