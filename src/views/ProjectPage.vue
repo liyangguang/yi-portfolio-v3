@@ -9,7 +9,7 @@ div(ref="projectPage")
   
   form(v-else, @submit="checkPassword")
     p This project is password protected. Reach out to <a href="mailto:yinie.ux@gmail.com" target="_blank">me</a> if you are interested.
-    input(type="password", autocomplete="new-password", v-model="password", placeholder="Password", @keyup.enter="checkPassword")
+    input(type="password", autocomplete="current-password", v-model="password", placeholder="Password", @keyup.enter="checkPassword")
     button(@click="checkPassword") submit
     p {{passwordMessage}}
 
@@ -48,9 +48,7 @@ export default {
   },
   mounted() {
     this.pageMounted = true;  // TOC needs to be mounted after the page is ready
-    this.$el.querySelectorAll('._fade-in').forEach((el) => {
-      fadeInElement(el);
-    });
+    this._registerFadeIn();
   },
   methods: {
     checkPassword(e) {
@@ -61,10 +59,18 @@ export default {
       if (this.passwordCorrect) {
         this.passwordMessage = '';
         window.scrollTo(0, 0);
+        this._registerFadeIn();
       } else {
         this.passwordMessage = 'Eh-oh, wrong password... Feel free to ping me for the password!'
       }
     },
+    _registerFadeIn() {
+      setTimeout(() => {
+        this.$el.querySelectorAll('._fade-in').forEach((el) => {
+          fadeInElement(el);
+        });
+      });
+    }
   },
 }
 </script>
