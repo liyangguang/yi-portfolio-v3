@@ -14,6 +14,8 @@ div(ref="projectPage")
     p {{passwordMessage}}
 
   SidebarToc(v-if="pageMounted", :pageDom="$refs.projectPage")
+
+  Footer
 </template>
 
 <script>
@@ -22,13 +24,14 @@ import SidebarToc from '@/components/SidebarToc.vue';
 import PriceRevamping from '@/projects/PriceRevamping.vue';
 import LoanApplicationForm from '@/projects/LoanApplicationForm.vue';
 import InvestorAnalytics from '@/projects/InvestorAnalytics.vue';
+import Footer from '@/components/Footer.vue';
 import {PROJECTS} from '@/PROJECT_DATA.js';
 import {fadeInElement} from '@/helpers';
 
 const PASSWORD = 'yinie-ux';
 
 export default {
-  components: {ProjectHeader, SidebarToc, PriceRevamping, InvestorAnalytics, LoanApplicationForm},
+  components: {ProjectHeader, SidebarToc, PriceRevamping, InvestorAnalytics, LoanApplicationForm, Footer},
   data() {
     return {
       pageMounted: false,
