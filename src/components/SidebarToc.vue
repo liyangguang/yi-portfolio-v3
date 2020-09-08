@@ -16,7 +16,7 @@ export default {
     };
   },
   mounted() {
-    this._findAllHeadings();
+    this.headings = Array.from(this.pageDom.querySelectorAll('h2, h3'));
     this._interval = setInterval(() => {
       // We need to handle image loading, page height change, throttling, etc. thus just use an interval
       this._highlightScrollPosition();
@@ -26,9 +26,6 @@ export default {
     clearInterval(this._interval);
   },
   methods: {
-    _findAllHeadings() {
-      this.headings = Array.from(this.pageDom.querySelectorAll('h2, h3'));
-    },
     _highlightScrollPosition() {
       const currentY = window.scrollY;
       for (const heading of this.headings) {

@@ -6,14 +6,13 @@ div(ref="projectPage")
     PriceRevamping(v-if="projectId === 'pricing-revamping'")
     LoanApplicationForm(v-if="projectId === 'loan-application-form'")
     InvestorAnalytics(v-if="projectId === 'investor-analytics-dashboard'")
+    SidebarToc(v-if="projectMounted", :pageDom="$refs.projectPage")
   
   form(v-else, @submit="checkPassword")
     p This project is password protected. Reach out to <a href="mailto:yinie.ux@gmail.com" target="_blank">me</a> if you are interested.
     input(type="password", autocomplete="current-password", v-model="password", placeholder="Password", @keyup.enter="checkPassword")
     button(@click="checkPassword") submit
     p {{passwordMessage}}
-
-  SidebarToc(v-if="pageMounted", :pageDom="$refs.projectPage")
 
   Footer
 </template>
@@ -34,7 +33,7 @@ export default {
   components: {ProjectHeader, SidebarToc, PriceRevamping, InvestorAnalytics, LoanApplicationForm, Footer},
   data() {
     return {
-      pageMounted: false,
+      projectMounted: false,  // For TOC. The page ref is passed into ToC, thus ToC must render after the page is mounted
       passwordCorrect: false,
       password: '',
       passwordMessage: '',
@@ -45,13 +44,12 @@ export default {
     project() {return PROJECTS.find((project) => project.id === this.projectId);},
     isPasswordProtected() {
       // Skip the password for local devserver
-      if (location.host.includes('localhost')) return false;
+      // if (location.host.includes('localhost')) return false;
       return this.project.isPasswordProtected;
     },
   },
   mounted() {
-    this.pageMounted = true;  // TOC needs to be mounted after the page is ready
-    this._registerFadeIn();
+    this._initProjectFeatures();
   },
   methods: {
     checkPassword(e) {
@@ -62,13 +60,18 @@ export default {
       if (this.passwordCorrect) {
         this.passwordMessage = '';
         window.scrollTo(0, 0);
-        this._registerFadeIn();
+        this._initProjectFeatures();
       } else {
         this.passwordMessage = 'Eh-oh, wrong password... Feel free to ping me for the password!'
       }
     },
-    _registerFadeIn() {
+    _initProjectFeatures() {
+      if (this.isPasswordProtected && !this.passwordCorrect) {
+        return;
+      }
+
       setTimeout(() => {
+        this.projectMounted = true;
         this.$el.querySelectorAll('._fade-in').forEach((el) => {
           fadeInElement(el);
         });
