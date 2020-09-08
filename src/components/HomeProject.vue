@@ -88,7 +88,7 @@ export default {
 h2 {
   text-transform: uppercase;
   margin: .5em 0;
-  font-size: 2.5em;
+  font-size: 2.0em;
   letter-spacing: .25em;
   line-height: 1.2;
   font-weight: 900;

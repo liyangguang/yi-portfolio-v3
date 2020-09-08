@@ -60,4 +60,5 @@ export default {
 .contacts {
   margin-top: 20em;
 }
+
 </style>

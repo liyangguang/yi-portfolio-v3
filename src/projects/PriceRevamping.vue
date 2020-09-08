@@ -54,7 +54,7 @@
       p._title Every design details could impact user’s efficacy
       p._text As a tool that is used by our internal users daily, every extra click means more fraction is added to their tasks. After we finalize the user flow, I went through several iterations on interfact design. Below are two examples among all the iterations and explorations
     ._card.-container-card._fade-in(v-for="(part, partIndex) in EXPLORATION")
-      p: span._tag(:class="{[`-tag-${partIndex + 1}`]: true}") {{part.tag}}
+      p: span._tag.-tag-2 {{part.tag}}
       h3 {{part.title}}
       p {{part.text}}
       ._grid.-default-2
@@ -68,20 +68,20 @@
       h2 final design
       p._title Streamlined workflow and rich data insights
     ._grid.-default-2
-      div.final-container(v-for="item in FINAL_DESIGN_1")
+      div.final-container(v-for="item in FINAL_DESIGN_1") 
+        img(:src="item.image")
         h3.image-title {{item.title}}
         p {{item.text}}
-        img(:src="item.image")
     ._grid.-default-1
       div.final-container(v-for="item in FINAL_DESIGN_2")
+        img(:src="item.image")
         h3.image-title {{item.title}}
         p {{item.text}}
-        img(:src="item.image")
     ._grid.-default-2
       div.final-container(v-for="item in FINAL_DESIGN_3")
+        img(:src="item.image")
         h3.image-title {{item.title}}
         p {{item.text}}
-        img(:src="item.image")
   
 
   

@@ -97,6 +97,16 @@ form {
 
   button {
     text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #ffffff;
+    background-color: #5257F6;
+    margin-left: 8px;
+    padding: 3px 12px;
+    border: 1px solid #5257F6 ;
+    
+
+    
   }
 }
 </style>

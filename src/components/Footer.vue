@@ -26,7 +26,7 @@ footer {
   margin-top: 5em;
   display: flex;
   align-items: center;
-  border-top: 1px solid rgba(255,255,255,.7);
+  border-top: 1px solid rgba(255,255,255,.4);
 }
 
 .icon-link {
